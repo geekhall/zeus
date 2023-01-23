@@ -1,5 +1,16 @@
 # Environment
 
+## 0. 软件版本列表
+```bash
+pnpm: 6.32.6
+node: 18.11.18
+typescript: 4.9.3
+vue: 3.2.45
+vite: 4.0.0
+vue-router: 4.0.13
+element-plus: 2.2.28
+vuex: 4.0.2
+```
 ## 1. 初始化Vite工程
 
 ```bash
@@ -167,6 +178,43 @@ export default defineConfig({
 })
 
 ```
+## 4. 安装及配置Vuex
+
+### 4.1 安装Vuex
+
+```bash
+pnpm install vuex@next
+```
+
+### 4.2 配置Vuex
+
+创建`store`文件夹，并在文件夹中创建`index.ts`文件
+
+```ts
+
+import { createStore } from 'vuex'
+
+const store = createStore({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment(state) {
+      state.count++
+    }
+  }
+})
+```
+
+在`main.ts`中引入`store`并挂载
+
+```ts
+// ...
+import store from './store'
+const app = createApp(App)
+
+```
+
 
 
 ### 启动环境

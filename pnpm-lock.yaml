@@ -13,10 +13,12 @@ specifiers:
   vue: ^3.2.45
   vue-router: ^4.0.13
   vue-tsc: ^1.0.11
+  vuex: ^4.0.2
 
 dependencies:
   vue: 3.2.45
   vue-router: 4.0.13_vue@3.2.45
+  vuex: 4.0.2_vue@3.2.45
 
 devDependencies:
   '@types/node': 18.11.18
@@ -1310,6 +1312,15 @@ packages:
       '@vue/runtime-dom': 3.2.45
       '@vue/server-renderer': 3.2.45_vue@3.2.45
       '@vue/shared': 3.2.45
+    dev: false
+
+  /vuex/4.0.2_vue@3.2.45:
+    resolution: {integrity: sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q==}
+    peerDependencies:
+      vue: ^3.0.2
+    dependencies:
+      '@vue/devtools-api': 6.5.0
+      vue: 3.2.45
     dev: false
 
   /webpack-sources/3.2.3:
