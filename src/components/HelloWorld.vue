@@ -14,7 +14,7 @@ const count = ref(0);
   <hr />
   <el-button type="primary">ELButton</el-button>
   <hr />
-
+  <div class="box"></div>
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
     <p>
@@ -22,7 +22,7 @@ const count = ref(0);
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
   </div>
-
+  <div></div>
   <p>
     Check out
     <a href="https://vuejs.org/guide/quick-start.html#local" target="_blank"
@@ -40,5 +40,18 @@ const count = ref(0);
 <style scoped>
 .read-the-docs {
   color: #888;
+}
+.card {
+  border-radius: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  position: relative;
+}
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: cyan;
+  border-radius: 0.5rem;
+  border: #888 1px solid;
 }
 </style>
