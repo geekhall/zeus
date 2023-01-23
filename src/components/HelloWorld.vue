@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+import "element-plus/es/components/message/style/css";
+import { ElButton } from "element-plus";
+
 defineProps<{ msg: string }>();
 
 const count = ref(0);
@@ -8,6 +11,9 @@ const count = ref(0);
 
 <template>
   <h1>{{ msg }}</h1>
+  <hr />
+  <el-button type="primary">ELButton</el-button>
+  <hr />
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
