@@ -4,7 +4,10 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import path from 'path'
-
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+import { fileURLToPath, URL } from "node:url";
+// import { resolve, dirname } from "node:path";
+import { dirname } from "node:path";
 // yarn add unplugin-element-plus
 // or
 // npm i unplugin-element-plus
@@ -21,7 +24,7 @@ import { resolve } from 'path'
 export default defineConfig({
   resolve: {
     alias: {
-      // '@': resolve(__dirname, 'src'),
+      '@': resolve(__dirname, 'src'),
       '~/': `${path.resolve(__dirname, 'src')}/`,
     }
   },
@@ -54,6 +57,9 @@ export default defineConfig({
       imports: ['vue', 'vue/macros', 'vue-router', '@vueuse/core'],
       dts: true,
       resolvers: [ElementPlusResolver()],
+    }),
+    VueI18nPlugin({
+      include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales/**'),
     }),
     Components({
       dts: true,

@@ -19,6 +19,9 @@ import store from './store'
 
 // import App from './App.vue'
 
+// 引入vue-i18n，用于国际化
+import { createI18n } from 'vue-i18n'
+import messages from "@intlify/unplugin-vue-i18n/messages";
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 // createApp
@@ -41,6 +44,17 @@ setupRouter(app)
 
 // 设置Vuex
 app.use(store)
+
+// 设置vue-i18n
+const i18n = createI18n({
+  legacy: false,  // you must specify `false`, to use Composition API, enables the Composition API.
+  globalInjection: true,  // allows you to use `this.$i18n` and `this.$t` in each component
+  locale: "en", // set locale
+  fallbackLocale: "en", // set fallback locale
+  availableLocales: ["en", "cn"], // set locale messages
+  messages: messages, // set locale messages
+});
+app.use(i18n)
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 // mount

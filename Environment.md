@@ -392,7 +392,147 @@ const getProducts = async () => {
 };
 ```
 
-## 6. 安装及配置i18n
+## 6. 安装及配置vue-i18n，添加国际化支持
+
+### 6.1 安装vue-i18n
+
+```bash
+
+pnpm install vue-i18n@9 --save
+pnpm install @intlify/unplugin-vue-i18n
+```
+
+`src` 目录下新建 `locales` 文件夹，里面新建 `locales.ts` 文件，用于定义语言包类型
+
+```ts
+export enum Locales {
+  EN = 'en',
+  CN = 'cn',
+}
+
+export const LOCALES = [
+  { value: Locales.EN, caption: 'English' },
+  { value: Locales.CN, caption: '中文' },
+]
+
+```
+
+
+`locales` 文件夹中新建 `index.ts` 文件，用于导出所有语言包
+
+```ts
+import { Locales } from './locales';
+
+import en from './en.json';
+import cn from './cn.json';
+
+export const messages = {
+  [Locales.EN]: en,
+  [Locales.CN]: cn,
+}
+
+export const defaultLocale = Locales.EN;
+
+```
+
+`locales` 文件夹中新建 `en.json` 文件和`cn.json`文件，用于定义中英文语言包
+
+```json
+{
+  "hello": "hello world"
+}
+```
+
+```json
+{
+  "hello": "你好，世界"
+}
+```
+
+在`vite.config.ts`中添加如下内容，配置国际化插件
+
+```ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+import { fileURLToPath, URL } from "node:url";
+import { resolve, dirname } from "node:path";
+
+export default defineConfig({
+  plugins: [
+    vue(),
+    VueI18nPlugin({
+      include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales/**'),
+    })
+  ],
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+  },
+})
+```
+
+在 `main.ts` 中添加如下内容，配置国际化
+
+```ts
+import { createApp } from 'vue'
+import App from './App.vue'
+import { createI18n } from 'vue-i18n'
+import messages from "@intlify/unplugin-vue-i18n/messages";
+const i18n = createI18n({
+  legacy: false,  // you must specify `false`, to use Composition API, enables the Composition API.
+  globalInjection: true,  // allows you to use `this.$i18n` and `this.$t` in each component
+  locale: "en", // set locale
+  fallbackLocale: "en", // set fallback locale
+  availableLocales: ["en", "cn"], // set locale messages
+  messages: messages, // set locale messages
+});
+const app = createApp(App)
+
+app.use(i18n) // 挂载i18n到app
+router.isReady().then(() => {
+  app.component('svg-icon', svgIcon)
+    .mount('#app')
+})
+
+```
+
+使用：
+```vue
+<template>
+  <div>
+    <h1>{{ $t('hello') }}</h1>
+  </div>
+</template>
+```
+
+## 7. 配置vueuse
+
+```bash
+pnpm install @vueuse/core --save
+```
+
+创建 `composables` 文件夹，用于存放非页面的组合式组件
+
+使用：
+
+```ts
+import { reactive } from "vue";
+import { useEventListener, useMouse } from "@vueuse/core";
+
+const { x, y } = useMouse();
+console.log(x.value);
+
+const mouse = reactive(useMouse());
+console.log(mouse.x);
+
+// 使用vueuse的useEventListener
+useEventListener("mousemove", (e: MouseEvent) => {
+  console.log(e.clientX, e.clientY);
+});
+```
+
 
 ### 启动环境
 
