@@ -10,6 +10,7 @@ vite: 4.0.0
 vue-router: 4.0.13
 element-plus: 2.2.28
 vuex: 4.0.2
+axios: 1.2.3
 ```
 ## 1. 初始化Vite工程
 
@@ -213,8 +214,156 @@ const store = createStore({
 import store from './store'
 const app = createApp(App)
 
+app.use(store)
+
 ```
 
+在组件或者ts中使用Vuex：
+```html
+<template>
+  <div class="counter">
+    <h3>Counter</h3>
+    <hr />
+    <h2>{{ cnt }}</h2>
+    <p>Counter page</p>
+    <el-button type="primary" @click="increase">Increase</el-button>
+    <el-button type="primary" @click="decrease">Decrease</el-button>
+  </div>
+</template>
+```
+
+```ts
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
+const store = useStore();
+
+const cnt = computed(() => store.state.count);
+const increase = () => store.commit("increment", { amount: 2 });
+const decrease = () => store.commit("decrement", { amount: 2 });
+
+```
+
+## 5. 安装及配置Axios
+
+### 5.1 安装Axios
+
+```bash
+pnpm install axios --save
+```
+
+### 5.2 配置Axios
+
+创建`utils`文件夹，并在文件夹中创建`request.ts`文件,
+
+```ts
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+export function request(config: AxiosRequestConfig) {
+
+  // 1. 创建 axios 实例
+  const instance = axios.create({
+    baseURL: '/api',
+    timeout: 5000,
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  })
+  // 2. axios 的拦截器
+  // 2.1 请求拦截的作用
+  instance.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        config.headers.Authorization = token;
+      }
+      return config;
+    },
+    (err) => {
+      console.log(err);
+      return Promise.reject(err);
+    }
+  );
+
+  // 2.2 响应拦截
+  instance.interceptors.response.use(
+    (res) => {
+      return res.data;
+    },
+    (err: any) => {
+      if (err?.response) {
+        switch (err.response.status) {
+          case 400:
+            err.message = '请求错误';
+            break;
+          case 401:
+            err.message = '未授权，请登录';
+            break;
+          case 403:
+            err.message = '拒绝访问';
+            break;
+          case 404:
+            err.message = `请求地址出错: ${err.response.config.url}`;
+            break;
+          case 408:
+            err.message = '请求超时';
+            break;
+          case 500:
+            err.message = '服务器内部错误';
+            break;
+          case 501:
+            err.message = '服务未实现';
+            break;
+          case 502:
+            err.message = '网关错误';
+            break;
+          case 503:
+            err.message = '服务不可用';
+            break;
+          case 504:
+            err.message = '网关超时';
+            break;
+          case 505:
+            err.message = 'HTTP版本不受支持';
+            break;
+          default:
+            err.message = '未知错误';
+            break;
+        }
+        return Promise.reject(err);
+      } else {
+        if (err.message.includes('timeout')) {
+          err.message = '请求超时';
+        }
+        if (err.message.includes('Network Error')) {
+          err.message = '网络错误';
+        }
+        return Promise.reject(err);
+      }
+      console.log(err);
+    }
+  )
+
+
+  return instance(config);
+}
+
+
+```
+
+在`vite.config.ts`中引入`request.ts`并挂载
+
+```ts
+
+
+```
+
+在组件或者ts中使用Axios：
+
+```ts
+```
 
 
 ### 启动环境

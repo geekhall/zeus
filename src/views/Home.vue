@@ -1,6 +1,6 @@
 
 <template>
-  <h1>Home</h1>
+  <h1 class="home">Home</h1>
   <hr />
   <p>Home page</p>
   <Counter />
@@ -15,4 +15,7 @@ const cnt = computed(() => store.state.count);
 </script>
 
 <style lang="less" scoped>
+.home {
+  color: cyan;
+}
 </style>
