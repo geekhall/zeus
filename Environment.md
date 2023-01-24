@@ -533,6 +533,72 @@ useEventListener("mousemove", (e: MouseEvent) => {
 });
 ```
 
+## 8. 安装使用ESLint和Prettier
+
+### 8.1 安装ESLint
+
+```bash
+
+pnpm install eslint --save-dev
+pnpm install @vue/eslint-config-typescript --save-dev
+pnpm install @vue/eslint-config-prettier --save-dev
+```
+
+在项目根目录下新建 `.eslintrc.js` 文件，添加如下内容
+
+```js
+module.exports = {
+  root: true,
+  env: {
+    node: true,
+  },
+  extends: [
+    'plugin:vue/vue3-essential',
+    '@vue/typescript/recommended',
+    '@vue/prettier',
+    '@vue/prettier/@typescript-eslint',
+  ],
+  parserOptions: {
+    ecmaVersion: 2020,
+  },
+  rules: {
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+  },
+};
+```
+
+### 8.2 安装Prettier
+
+```bash
+pnpm install prettier --save-dev
+```
+
+在项目根目录下新建 `.prettierrc` 文件，添加如下内容
+
+```json
+{
+  "printWidth": 100,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": true,
+  "quoteProps": "as-needed",
+  "jsxSingleQuote": false,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "arrowParens": "always",
+  "requirePragma": false,
+  "insertPragma": false,
+  "proseWrap": "preserve",
+  "htmlWhitespaceSensitivity": "css",
+  "vueIndentScriptAndStyle": false,
+  "endOfLine": "lf"
+}
+```
+
+
 
 ### 启动环境
 

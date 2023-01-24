@@ -1,32 +1,20 @@
 <template>
   <h1>Axios Sample Page</h1>
-  <el-button class="btn" type="primary" @click="clearProducts"
-    >清空数据</el-button
-  >
-  <el-button class="btn" type="primary" @click="getProducts"
-    >获取数据</el-button
-  >
+  <el-button class="btn" type="primary" @click="clearProducts">清空数据</el-button>
+  <el-button class="btn" type="primary" @click="getProducts">获取数据</el-button>
   <hr />
   <div class="container">
     <div class="content">
       <el-table :data="envs" stripe style="width: 100%">
         <el-table-column prop="id" label="ID" width="80"> </el-table-column>
-        <el-table-column prop="name" label="环境名称" width="120">
-        </el-table-column>
-        <el-table-column prop="description" label="描述" width="150">
-        </el-table-column>
-        <el-table-column prop="dbType" label="数据库类型" width="120">
-        </el-table-column>
-        <el-table-column prop="dbHost" label="IP" width="120">
-        </el-table-column>
-        <el-table-column prop="dbPort" label="端口" width="80">
-        </el-table-column>
-        <el-table-column prop="dbServName" label="实例名" width="120">
-        </el-table-column>
-        <el-table-column prop="dbName" label="库名" width="120">
-        </el-table-column>
-        <el-table-column prop="dbUser" label="用户名" width="120">
-        </el-table-column>
+        <el-table-column prop="name" label="环境名称" width="120"> </el-table-column>
+        <el-table-column prop="description" label="描述" width="150"> </el-table-column>
+        <el-table-column prop="dbType" label="数据库类型" width="120"> </el-table-column>
+        <el-table-column prop="dbHost" label="IP" width="120"> </el-table-column>
+        <el-table-column prop="dbPort" label="端口" width="80"> </el-table-column>
+        <el-table-column prop="dbServName" label="实例名" width="120"> </el-table-column>
+        <el-table-column prop="dbName" label="库名" width="120"> </el-table-column>
+        <el-table-column prop="dbUser" label="用户名" width="120"> </el-table-column>
         <el-table-column prop="comment" label="备注"> </el-table-column>
       </el-table>
     </div>
@@ -36,63 +24,63 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "vue";
-import axios from "axios";
-import { useStore } from "vuex";
+import { computed, onMounted, ref } from 'vue'
+import axios from 'axios'
+import { useStore } from 'vuex'
 
 interface ILocalEnvironment {
-  id: number;
-  name: string;
-  description: string;
-  dbType: string;
-  dbHost: string;
-  dbPort: number;
-  dbServType: string;
-  dbServName: string;
-  dbName: string;
-  dbUser: string;
-  dbPassword: string;
-  userId: number;
-  useFrom: string;
-  useTo: string;
-  deleted: boolean;
+  id: number
+  name: string
+  description: string
+  dbType: string
+  dbHost: string
+  dbPort: number
+  dbServType: string
+  dbServName: string
+  dbName: string
+  dbUser: string
+  dbPassword: string
+  userId: number
+  useFrom: string
+  useTo: string
+  deleted: boolean
 }
 
-let title_color = ["#f60", "#3c0"];
-const envs = ref([{}] as ILocalEnvironment[]);
-const currentDate = ref(new Date());
+let title_color = ['#f60', '#3c0']
+const envs = ref([{}] as ILocalEnvironment[])
+const currentDate = ref(new Date())
 const clearProducts = () => {
-  envs.value = [];
-};
+  envs.value = []
+}
 const handleEdit = (index: number, row: ILocalEnvironment) => {
-  console.log(index, row);
-};
+  console.log(index, row)
+}
 const handleDelete = (index: number, row: ILocalEnvironment) => {
-  console.log(index, row);
-};
+  console.log(index, row)
+}
 const getProducts = async () => {
   const result = await axios({
-    method: "GET",
-    url: "/api/environment/all",
+    method: 'GET',
+    url: '/api/environment/all'
   })
     .then((res: any) => {
-      console.log(res.data);
-      console.log("Test2:@@@" + JSON.stringify(res.data));
-      envs.value = JSON.parse(JSON.stringify(res.data));
-      console.log("Test2:@@@: envs=" + JSON.stringify(envs));
+      console.log(res.data)
+      console.log('Test2:@@@' + JSON.stringify(res.data))
+      envs.value = JSON.parse(JSON.stringify(res.data))
+      console.log('Test2:@@@: envs=' + JSON.stringify(envs))
     })
     .catch((err: any) => {
-      console.log(err.message);
-    });
-};
-const store = useStore();
+      console.log(err.message)
+    })
+}
+const store = useStore()
 const random_color = () => {
-  return title_color[Math.floor(Math.random() * title_color.length)];
-};
+  return title_color[Math.floor(Math.random() * title_color.length)]
+}
 
 onMounted(() => {
-  getProducts();
-});
+  getProducts()
+})
 </script>
 
 <style lang="less" scoped>
