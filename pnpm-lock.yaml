@@ -5,6 +5,7 @@ specifiers:
   '@vitejs/plugin-vue': ^4.0.0
   element-plus: ^2.2.28
   less: ^4.1.3
+  sass: ^1.57.1
   scss: ^0.2.4
   typescript: ^4.9.3
   unplugin-auto-import: ^0.12.1
@@ -27,12 +28,13 @@ devDependencies:
   '@vitejs/plugin-vue': 4.0.0_vite@4.0.4+vue@3.2.45
   element-plus: 2.2.28_vue@3.2.45
   less: 4.1.3
+  sass: 1.57.1
   scss: 0.2.4
   typescript: 4.9.4
   unplugin-auto-import: 0.12.1
   unplugin-element-plus: 0.4.1_vite@4.0.4
   unplugin-vue-components: 0.22.12_vue@3.2.45
-  vite: 4.0.4_@types+node@18.11.18+less@4.1.3
+  vite: 4.0.4_c4607ba3f813a9482be81201180182f1
   vite-plugin-style-import: 2.0.0_vite@4.0.4
   vue-tsc: 1.0.24_typescript@4.9.4
 
@@ -348,7 +350,7 @@ packages:
       vite: ^4.0.0
       vue: ^3.2.25
     dependencies:
-      vite: 4.0.4_@types+node@18.11.18+less@4.1.3
+      vite: 4.0.4_c4607ba3f813a9482be81201180182f1
       vue: 3.2.45
     dev: true
 
@@ -814,6 +816,10 @@ packages:
     dev: true
     optional: true
 
+  /immutable/4.2.2:
+    resolution: {integrity: sha512-fTMKDwtbvO5tldky9QZ2fMX7slR0mYpY5nbnFWYp0fOzDhHqhgIw9KoYgxLWsoNTS9ZHGauHj18DTyEw6BK3Og==}
+    dev: true
+
   /is-binary-path/2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
     engines: {node: '>=8'}
@@ -1142,6 +1148,16 @@ packages:
     dev: true
     optional: true
 
+  /sass/1.57.1:
+    resolution: {integrity: sha512-O2+LwLS79op7GI0xZ8fqzF7X2m/m8WFfI02dHOdsK5R2ECeS5F62zrwg/relM1rjSLy7Vd/DiMNIvPrQGsA0jw==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.2.2
+      source-map-js: 1.0.2
+    dev: true
+
   /sax/1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
     dev: true
@@ -1325,7 +1341,7 @@ packages:
     dependencies:
       acorn: 8.8.1
       chokidar: 3.5.3
-      vite: 4.0.4_@types+node@18.11.18+less@4.1.3
+      vite: 4.0.4_c4607ba3f813a9482be81201180182f1
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.4.6
     dev: true
@@ -1363,10 +1379,10 @@ packages:
       fs-extra: 10.1.0
       magic-string: 0.25.9
       pathe: 0.2.0
-      vite: 4.0.4_@types+node@18.11.18+less@4.1.3
+      vite: 4.0.4_c4607ba3f813a9482be81201180182f1
     dev: true
 
-  /vite/4.0.4_@types+node@18.11.18+less@4.1.3:
+  /vite/4.0.4_c4607ba3f813a9482be81201180182f1:
     resolution: {integrity: sha512-xevPU7M8FU0i/80DMR+YhgrzR5KS2ORy1B4xcX/cXLsvnUWvfHuqMmVU6N0YiJ4JWGRJJsLCgjEzKjG9/GKoSw==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -1397,6 +1413,7 @@ packages:
       postcss: 8.4.21
       resolve: 1.22.1
       rollup: 3.10.1
+      sass: 1.57.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true

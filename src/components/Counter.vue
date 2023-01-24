@@ -18,7 +18,7 @@ const increase = () => store.commit("increment", { amount: 2 });
 const decrease = () => store.commit("decrement", { amount: 2 });
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .counter {
   width: 100%;
   height: 100px;
