@@ -356,15 +356,43 @@ export function request(config: AxiosRequestConfig) {
 在`vite.config.ts`中引入`request.ts`并挂载
 
 ```ts
-
+server: {
+    port: 3000,
+    open: true, // 自动打开浏览器
+    hmr: true,  // 热模块替换
+    base: './', // 生产环境下的公共路径
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8888', // 后端服务实际地址
+        changeOrigin: true, // 开启代理换源功能，服务器端接收到的请求源为localhost:8888
+        // ws: true,        // 支持websocket
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 
 ```
 
 在组件或者ts中使用Axios：
 
 ```ts
+import axios from "axios";
+
+const getProducts = async () => {
+  const result = await axios({
+    method: "GET",
+    url: "/api/environment/all",
+  })
+    .then((res: any) => {
+      envs.value = JSON.parse(JSON.stringify(res.data));
+    })
+    .catch((err: any) => {
+      console.log(err.message);
+    });
+};
 ```
 
+## 6. 安装及配置i18n
 
 ### 启动环境
 
