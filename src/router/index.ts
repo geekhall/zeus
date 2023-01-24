@@ -7,13 +7,15 @@ const Home = () => import('../views/Home.vue')
 const About = () => import('../views/About.vue')
 const HelloWorld = () => import('../components/HelloWorld.vue')
 const Environment = () => import('../views/Environment.vue')
+const VueUseSample = () => import('../views/VueUseSample.vue')
 
 // 2. Define some routes
 const routes = [
   { path: '/', name: "home", component: Home },
   { path: '/about', name: "about", component: About },
   { path: '/hello', name: "hello", component: HelloWorld },
-  { path: '/env', name: "environment", component: Environment }
+  { path: '/env', name: "environment", component: Environment },
+  { path: '/vueuse', name: "vueuse", component: VueUseSample },
 ]
 
 // 3. Create the router instance and pass the `routes` option

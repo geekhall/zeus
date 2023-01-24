@@ -3,7 +3,7 @@ import { defineConfig } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-
+import path from 'path'
 
 // yarn add unplugin-element-plus
 // or
@@ -19,8 +19,16 @@ import { resolve } from 'path'
 // const path_resolve = (dir: string) => path.join(__dirname, dir)
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      // '@': resolve(__dirname, 'src'),
+      '~/': `${path.resolve(__dirname, 'src')}/`,
+    }
+  },
   plugins: [
-    vue(),
+    vue({
+      reactivityTransform: true,
+    }),
     ElementPlus({
       // use `unplugin-auto-import` to automatically import components
       // use `unplugin-vue-components` to manually import components
@@ -43,19 +51,15 @@ export default defineConfig({
     //   ],
     // }),
     AutoImport({
+      imports: ['vue', 'vue/macros', 'vue-router', '@vueuse/core'],
+      dts: true,
       resolvers: [ElementPlusResolver()],
     }),
     Components({
+      dts: true,
       resolvers: [ElementPlusResolver()],
     }),
   ],
-  resolve: {
-    alias: {
-      '@': resolve(__dirname, 'src'),
-      '@c': resolve(__dirname, 'src/components'),
-      '@v': resolve(__dirname, 'src/views'),
-    }
-  },
   server: {
     port: 3000,
     open: true, // 自动打开浏览器
