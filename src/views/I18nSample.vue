@@ -15,4 +15,6 @@ const langs = ["cn", "en"];
 </script>
 
 <style lang="sass" scoped>
+.home
+  color: cyan
 </style>

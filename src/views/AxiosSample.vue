@@ -1,10 +1,10 @@
 <template>
-  <h1>Environment Page</h1>
+  <h1>Axios Sample Page</h1>
   <el-button class="btn" type="primary" @click="clearProducts"
-    >清空环境</el-button
+    >清空数据</el-button
   >
   <el-button class="btn" type="primary" @click="getProducts"
-    >获取环境</el-button
+    >获取数据</el-button
   >
   <hr />
   <div class="container">

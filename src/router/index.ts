@@ -6,7 +6,7 @@ import HelloWorldVue from '../components/HelloWorld.vue'
 const Home = () => import('../views/Home.vue')
 const About = () => import('../views/About.vue')
 const HelloWorld = () => import('../components/HelloWorld.vue')
-const Environment = () => import('../views/Environment.vue')
+const AxiosSample = () => import('../views/AxiosSample.vue')
 const VueUseSample = () => import('../views/VueUseSample.vue')
 const I18nSample = () => import('../views/I18nSample.vue')
 
@@ -15,9 +15,9 @@ const routes = [
   { path: '/', name: "home", component: Home },
   { path: '/about', name: "about", component: About },
   { path: '/hello', name: "hello", component: HelloWorld },
-  { path: '/env', name: "environment", component: Environment },
-  { path: '/vueuse', name: "vueuse", component: VueUseSample },
-  { path: '/i18n', name: "i18nsample", component: I18nSample },
+  { path: '/axios', name: "axiosSample", component: AxiosSample },
+  { path: '/vueuse', name: "vueuseSample", component: VueUseSample },
+  { path: '/i18n', name: "i18nSample", component: I18nSample },
 ]
 
 // 3. Create the router instance and pass the `routes` option
