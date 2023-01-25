@@ -669,23 +669,16 @@ pnpm i -D unocss @unocss/vite
 
 ```ts
 import UnoCSS from 'unocss/vite'
-
-export default {
+// ...
+export default defineConfig({
+  // ...
   plugins: [
+    // ...
     UnoCSS({
-      preset: 'windi',
-      presetEnv: {
-        stage: 0,
-        features: {
-          'focus-within-pseudo-class': false,
-        },
-      },
-      plugins: [
-        // ...
-      ],
+      // presets: []
     }),
   ],
-}
+})
 ```
 
 ### 10.3 在 `main.ts` 中引入 `unocss.css`
@@ -693,7 +686,36 @@ export default {
 ```ts
 import 'uno.css'
 ```
+## 11. 安装使用Normalize.css
 
+### 11.1 安装Normalize.css
+
+```bash
+pnpm i -D normalize.css
+```
+
+### 11.2 在 `main.ts` 中引入 `normalize.css`
+
+```ts
+import 'normalize.css/normalize.css'
+```
+
+
+## 12. 安装使用iconify
+
+### 12.1 安装iconify
+
+```bash
+pnpm i -D @iconify/iconify vite-plugin-purge-icons @iconify/json
+```
+
+### 12.2 配置iconify
+
+在 `vite.config.ts` 中添加如下配置
+
+```ts
+
+```
 
 
 

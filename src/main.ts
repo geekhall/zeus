@@ -3,6 +3,10 @@ import Vue from 'vue'
 
 /** 重置样式 这里引入自定义的重置样式也可 */
 // import '@unocss/reset/tailwind.css' // 这里放开会导致式样错乱，暂时不知道为什么
+
+// 引入normalize.css
+import 'normalize.css/normalize.css'
+
 /**
  *  项目内的样式，
  *  注意：最好放在重置样式后，uno.css前
