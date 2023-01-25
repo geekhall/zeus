@@ -622,8 +622,13 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  corePlugins: {
+    preflight: false, // disable preflight, 解决 tailwindcss 与 Element Plus 样式冲突问题
+  }
 }
 ```
+
+`preflight: false, `这个比较重要，否则会和Element Plus的样式冲突
 
 ```js
 // postcss.config.cjs
@@ -649,6 +654,46 @@ module.exports = {
 ```ts
 import './tailwind.css'
 ```
+
+### 10 安装使用UnoCSS
+
+### 10.1 安装UnoCSS
+
+```bash
+pnpm i -D unocss @unocss/vite
+```
+
+### 10.2 配置UnoCSS
+
+在 `vite.config.ts` 中添加如下配置
+
+```ts
+import UnoCSS from 'unocss/vite'
+
+export default {
+  plugins: [
+    UnoCSS({
+      preset: 'windi',
+      presetEnv: {
+        stage: 0,
+        features: {
+          'focus-within-pseudo-class': false,
+        },
+      },
+      plugins: [
+        // ...
+      ],
+    }),
+  ],
+}
+```
+
+### 10.3 在 `main.ts` 中引入 `unocss.css`
+
+```ts
+import 'uno.css'
+```
+
 
 
 

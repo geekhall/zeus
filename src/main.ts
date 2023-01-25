@@ -1,6 +1,17 @@
 import { createApp } from 'vue'
 import Vue from 'vue'
+
+/** 重置样式 这里引入自定义的重置样式也可 */
+// import '@unocss/reset/tailwind.css' // 这里放开会导致式样错乱，暂时不知道为什么
+/**
+ *  项目内的样式，
+ *  注意：最好放在重置样式后，uno.css前
+ */
 import './style.css'
+import './tailwind.css'
+
+// 引入uno.css
+import 'uno.css'
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 // import section
@@ -28,7 +39,7 @@ import messages from "@intlify/unplugin-vue-i18n/messages";
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 import App from './App.vue'
-import './tailwind.css'
+
 const app = createApp(App)
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

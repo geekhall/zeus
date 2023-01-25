@@ -8,6 +8,7 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import { fileURLToPath, URL } from "node:url";
 // import { resolve, dirname } from "node:path";
 import { dirname } from "node:path";
+
 // yarn add unplugin-element-plus
 // or
 // npm i unplugin-element-plus
@@ -16,7 +17,7 @@ import { dirname } from "node:path";
 import ElementPlus from 'unplugin-element-plus/vite'
 
 // import styleImport from 'vite-plugin-style-import'
-
+import UnoCSS from 'unocss/vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 // const path_resolve = (dir: string) => path.join(__dirname, dir)
@@ -36,6 +37,9 @@ export default defineConfig({
       // use `unplugin-auto-import` to automatically import components
       // use `unplugin-vue-components` to manually import components
 
+    }),
+    UnoCSS({
+      // presets: []
     }),
     // styleImport({
     //   libs: [
