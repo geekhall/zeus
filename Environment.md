@@ -598,6 +598,58 @@ pnpm install prettier --save-dev
 }
 ```
 
+## 9. 安装使用TailwindCSS
+
+### 9.1 安装TailwindCSS
+
+```bash
+pnpm install tailwindcss@latest postcss@latest autoprefixer@latest --save-dev
+```
+
+### 9.2 创建TailwindCSS配置文件
+
+执行`pnpx tailwindcss init -p` 命令，会在项目根目录下生成 `tailwind.config.cjs` 文件和 `postcss.config.cjs` 文件，
+配置内容如下：
+
+```js
+// tailwind.config.cjs
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'], // tree-shaking for production
+  darkMode: false, // or 'media' or 'class'
+  content: [],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+```
+
+```js
+// postcss.config.cjs
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+```
+
+### 9.4 创建 `tailwind.css` 文件
+
+```css
+// ./src/tailwind.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### 9.5 在 `main.ts` 中引入 `tailwind.css`
+
+```ts
+import './tailwind.css'
+```
+
 
 
 ### 启动环境

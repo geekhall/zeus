@@ -28,6 +28,7 @@ import messages from "@intlify/unplugin-vue-i18n/messages";
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
 
 import App from './App.vue'
+import './tailwind.css'
 const app = createApp(App)
 
 //_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/

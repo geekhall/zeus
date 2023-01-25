@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import type { App } from 'vue'
-import HelloWorldVue from '../components/HelloWorld.vue'
 
 // 1. Define route components.
 const Home = () => import('../views/Home.vue')
@@ -9,6 +8,7 @@ const HelloWorld = () => import('../components/HelloWorld.vue')
 const AxiosSample = () => import('../views/AxiosSample.vue')
 const VueUseSample = () => import('../views/VueUseSample.vue')
 const I18nSample = () => import('../views/I18nSample.vue')
+const TailwindSample = () => import('../views/TailwindSample.vue')
 
 // 2. Define some routes
 const routes = [
@@ -18,6 +18,7 @@ const routes = [
   { path: '/axios', name: "axiosSample", component: AxiosSample },
   { path: '/vueuse', name: "vueuseSample", component: VueUseSample },
   { path: '/i18n', name: "i18nSample", component: I18nSample },
+  { path: '/tailwind', name: "tailwindSample", component: TailwindSample },
 ]
 
 // 3. Create the router instance and pass the `routes` option

@@ -8,11 +8,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, reactive } from "vue";
-import { useStore } from "vuex";
+import { computed, ref, reactive } from 'vue'
+import { useStore } from 'vuex'
 
-const store = useStore();
-const cnt = computed(() => store.state.count);
+const store = useStore()
+const cnt = computed(() => store.state.count)
 </script>
 
 <style lang="less" scoped>
