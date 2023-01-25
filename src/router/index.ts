@@ -10,6 +10,8 @@ const VueUseSample = () => import('../views/VueUseSample.vue')
 const I18nSample = () => import('../views/I18nSample.vue')
 const TailwindSample = () => import('../views/TailwindSample.vue')
 const UnoCssSample = () => import('../views/UnoCssSample.vue')
+const IconSample = () => import('../views/IconSample.vue')
+
 
 // 2. Define some routes
 const routes = [
@@ -21,6 +23,7 @@ const routes = [
   { path: '/i18n', name: "i18nSample", component: I18nSample },
   { path: '/tailwind', name: "tailwindSample", component: TailwindSample },
   { path: '/uno', name: "unoCssSample", component: UnoCssSample },
+  { path: '/icon', name: "iconSample", component: IconSample },
 ]
 
 // 3. Create the router instance and pass the `routes` option

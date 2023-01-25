@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'], // tree-shaking for production
-  darkMode: false, // or 'media' or 'class'
-  content: [],
+  content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],// tree-shaking for production
   theme: {
     extend: {},
   },

@@ -709,16 +709,168 @@ import 'normalize.css/normalize.css'
 pnpm i -D @iconify/iconify vite-plugin-purge-icons @iconify/json
 ```
 
-### 12.2 配置iconify
+### 12.2 配置iconify(暂时不用，有问题，待解决)
+
+按照以下步骤配置iconify后，Vite启动会报443错误，暂时不用
 
 在 `vite.config.ts` 中添加如下配置
 
 ```ts
+// vite.config.ts
+import PurgeIcons from 'vite-plugin-purge-icons'
+
+// ...
+export default defineConfig({
+  // ...
+  plugins: [
+    // ...
+    PurgeIcons({
+      // Specify the icons pack to use (default: 'mdi')
+    }),
+  ],
+})
+```
+
+### 12.3 在 `main.ts` 中引入 `iconify`
+
+```ts
+// main.ts
+import '@purge-icons/generated'
+
+```
+
+### 12.4 在 `App.vue` 中使用iconify
+
+可以在 [iconify](https://iconify.design/icon-sets/) 中搜索图标，然后复制图标代码
+
+
+
+## 13 自动导入ElementPlus组件、函数、Icons、样式
+
+### 13.1 安装插件
+
+```bash
+pnpm i -D unplugin-icons @iconify-json/ep
+pnpm i @element-plus/icons-vue
+```
+
+### 13.2 配置插件
+```ts
+// vite.config.ts
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+
+// ...
+export default defineConfig({
+  // ...
+  plugins: [
+    // ...
+    AutoImport({
+      resolvers: [
+        // 自动导入Icons图标
+        IconsResolver({
+          prefix: 'Icon',
+        }),
+        Components({
+          resolvers: [
+            ElementPlusResolver(),
+            // 自动导入Icons图标
+            IconsResolver({
+              enabledCollections: ['ep']
+            })
+          ],
+          // 自动导入的组件包含文件夹，扫描该文件夹下所有的.vue文件
+          dirs: [
+            "./src/components/**",
+            "./src/views/**",
+            "./src/layouts/**",
+            "./src/composables/**"
+          ],
+        }),
+        Icons({
+          autoInstall: true,
+        }),
+        // ...
+  ],
+})
 
 ```
 
 
+```ts
+// vite.config.ts
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
+import Unocss from 'unocss/vite'
+import { presetIcons } from 'unocss'
+
+export default defineConfig({
+  plugins: [
+    vue(),
+
+    // 添加以下配置
+    Unocss({
+      presets: [
+        presetIcons({
+          scale: 1.2,
+          warn: true
+        }),
+      ],
+      // 以下配置是为了可以直接使用标签 <i-ep-edit />
+      variants: [
+        {
+          match: (s) => {
+            if (s.startsWith('i-')) {
+              return {
+                matcher: s,
+                selector: (s) => {
+                  return s.startsWith('.') ? `${s.slice(1)},${s}` : s
+                },
+              }
+            }
+          },
+        },
+      ],
+    })
+  ]
+})
+```
+
+参考：[https://juejin.cn/post/7091967019959975943](https://juejin.cn/post/7091967019959975943)
+
+### 13.3 使用
+
+```vue
+<template>
+  <div style="margin: 50px;">
+    <el-space direction="vertical" alignment="left">
+      <!-- 直接使用 -->
+      <el-space>
+        <!-- 使用class -->
+        <div class="i-ep-lock"></div>
+        <!-- 使用标签 -->
+        <i-ep-edit />
+      </el-space>
+
+      <!-- 组件里使用 -->
+      <el-button icon="i-ep-avatar">Button</el-button>
+
+      <el-input prefix-icon="i-ep-search" suffix-icon="i-ep-pointer" ></el-input>
+
+      <el-menu>
+        <el-menu-item >
+          <el-icon class="i-ep-menu"></el-icon>
+          <span>Navigator Two</span>
+        </el-menu-item>
+      </el-menu>
+
+    </el-space>
+  </div>
+</template>
+
+
+```
 ### 启动环境
 
 ```bash

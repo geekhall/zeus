@@ -9,17 +9,17 @@ import { fileURLToPath, URL } from "node:url";
 // import { resolve, dirname } from "node:path";
 import { dirname } from "node:path";
 
-// yarn add unplugin-element-plus
-// or
-// npm i unplugin-element-plus
-// or
 // pnpm i unplugin-element-plus
 import ElementPlus from 'unplugin-element-plus/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 
 // import styleImport from 'vite-plugin-style-import'
 import UnoCSS from 'unocss/vite'
+import { presetIcons } from 'unocss'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
+import { dir } from 'console'
 // const path_resolve = (dir: string) => path.join(__dirname, dir)
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -40,6 +40,27 @@ export default defineConfig({
     }),
     UnoCSS({
       // presets: []
+      presets: [
+        presetIcons({
+          scale: 1.2,
+          warn: true
+        }),
+      ],
+      // 以下配置是为了可以直接使用标签 <i-ep-edit />
+      variants: [
+        {
+          match: (s) => {
+            if (s.startsWith('i-')) {
+              return {
+                matcher: s,
+                selector: (s) => {
+                  return s.startsWith('.') ? `${s.slice(1)},${s}` : s
+                },
+              }
+            }
+          },
+        }
+      ],
     }),
     // styleImport({
     //   libs: [
@@ -60,19 +81,43 @@ export default defineConfig({
     AutoImport({
       imports: ['vue', 'vue/macros', 'vue-router', '@vueuse/core'],
       dts: true,
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        // 自动导入ElementPlus组件
+        ElementPlusResolver(),
+        // 自动导入Icons图标
+        IconsResolver({
+          prefix: 'Icon',
+        }),
+      ],
     }),
     VueI18nPlugin({
       include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales/**'),
     }),
     Components({
       dts: true,
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+
+        ElementPlusResolver(),
+        // 自动导入Icons图标
+        IconsResolver({
+          enabledCollections: ['ep']
+        })
+      ],
+      // 自动导入的组件包含文件夹，扫描该文件夹下所有的.vue文件
+      dirs: [
+        "./src/components/**",
+        "./src/views/**",
+        "./src/layouts/**",
+        "./src/composables/**"
+      ],
+    }),
+    Icons({
+      autoInstall: true,
     }),
   ],
   server: {
     port: 3000,
-    open: true, // 自动打开浏览器
+    // open: true, // 自动打开浏览器
     hmr: true,  // 热模块替换
     base: './', // 生产环境下的公共路径
     proxy: {

@@ -1,6 +1,8 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@element-plus/icons-vue': ^2.0.10
+  '@iconify-json/ep': ^1.1.8
   '@intlify/unplugin-vue-i18n': ^0.8.1
   '@types/node': ^18.11.18
   '@unocss/vite': ^0.48.5
@@ -21,6 +23,7 @@ specifiers:
   unocss: ^0.48.5
   unplugin-auto-import: ^0.12.1
   unplugin-element-plus: ^0.4.1
+  unplugin-icons: ^0.15.1
   unplugin-vue-components: ^0.22.12
   vite: ^4.0.0
   vite-plugin-style-import: ^2.0.0
@@ -31,6 +34,7 @@ specifiers:
   vuex: ^4.0.2
 
 dependencies:
+  '@element-plus/icons-vue': 2.0.10_vue@3.2.45
   '@intlify/unplugin-vue-i18n': 0.8.1_vue-i18n@9.2.2
   axios: 1.2.3
   vue: 3.2.45
@@ -39,6 +43,7 @@ dependencies:
   vuex: 4.0.2_vue@3.2.45
 
 devDependencies:
+  '@iconify-json/ep': 1.1.8
   '@types/node': 18.11.18
   '@unocss/vite': 0.48.5_vite@4.0.4
   '@vitejs/plugin-vue': 4.0.0_vite@4.0.4+vue@3.2.45
@@ -57,6 +62,7 @@ devDependencies:
   unocss: 0.48.5_vite@4.0.4
   unplugin-auto-import: 0.12.1_@vueuse+core@9.11.1
   unplugin-element-plus: 0.4.1_vite@4.0.4
+  unplugin-icons: 0.15.1
   unplugin-vue-components: 0.22.12_vue@3.2.45
   vite: 4.0.4_c4607ba3f813a9482be81201180182f1
   vite-plugin-style-import: 2.0.0_vite@4.0.4
@@ -103,7 +109,6 @@ packages:
       vue: ^3.2.0
     dependencies:
       vue: 3.2.45
-    dev: true
 
   /@esbuild/android-arm/0.16.17:
     resolution: {integrity: sha512-N9x1CMXVhtWEAMS7pNNONyA14f71VPQN9Cnavj1XQh6T7bskqiLLrSca4O0Vr8Wdcga943eThxnVp3JLnBMYtw==}
@@ -348,6 +353,12 @@ packages:
 
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    dev: true
+
+  /@iconify-json/ep/1.1.8:
+    resolution: {integrity: sha512-pHCrsWU1R9/pTDU+Fps4+mjqOQFLtpGdXWegkhQ1P1DlgQAlCPyICtl6E1s8b7VwJMeZXaK84HA02UF6WD0o/Q==}
+    dependencies:
+      '@iconify/types': 2.0.0
     dev: true
 
   /@iconify/types/2.0.0:
@@ -2712,6 +2723,34 @@ packages:
       - rollup
       - vite
       - webpack
+    dev: true
+
+  /unplugin-icons/0.15.1:
+    resolution: {integrity: sha512-d4Gc8A4qIJYIXKueltTwoHfR3Cxsdfnmz8lSN5dsITEyai5tdb0uWpbQkn3j9HUlLDSB1ybdQIf5CItxJT3UDw==}
+    peerDependencies:
+      '@svgr/core': '>=5.5.0'
+      '@vue/compiler-sfc': ^3.0.2 || ^2.7.0
+      vue-template-compiler: ^2.6.12
+      vue-template-es2015-compiler: ^1.9.0
+    peerDependenciesMeta:
+      '@svgr/core':
+        optional: true
+      '@vue/compiler-sfc':
+        optional: true
+      vue-template-compiler:
+        optional: true
+      vue-template-es2015-compiler:
+        optional: true
+    dependencies:
+      '@antfu/install-pkg': 0.1.1
+      '@antfu/utils': 0.7.2
+      '@iconify/utils': 2.0.12
+      debug: 4.3.4
+      kolorist: 1.6.0
+      local-pkg: 0.4.3
+      unplugin: 1.0.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /unplugin-vue-components/0.22.12_vue@3.2.45:
